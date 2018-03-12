@@ -233,6 +233,9 @@ class Pak(object):
 		elif self.version == 3:
 			read_record = read_record_v3
 
+		elif self.version == 4:
+			read_record = read_record_v3
+
 		def check_data(ctx, offset, size, sha1):
 			hasher = hashlib.sha1()
 			stream.seek(offset, 0)
@@ -667,6 +670,9 @@ def read_index(stream,check_integrity=False):
 		read_record = read_record_v2
 
 	elif version == 3:
+		read_record = read_record_v3
+
+	elif version == 4:
 		read_record = read_record_v3
 
 	else:
@@ -1411,7 +1417,7 @@ def main(argv):
 				if aliases:
 					dest += ' (%s)' % ','.join(aliases)
 				sup = super(AliasedSubParsersAction._AliasedPseudoAction, self)
-				sup.__init__(option_strings=[], dest=dest, help=help) 
+				sup.__init__(option_strings=[], dest=dest, help=help)
 
 		def add_parser(self, name, **kwargs):
 			if 'aliases' in kwargs:
